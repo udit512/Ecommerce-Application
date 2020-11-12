@@ -1,6 +1,14 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+var variantSchema = new Schema({
+    variant : {
+        type : Schema.Types.ObjectId,
+        ref : "Variant"
+    },
+    value : String
+})
+
 var productSchema = new Schema({
     _id : Schema.Types.ObjectId,
     product_name : {
@@ -17,13 +25,11 @@ var productSchema = new Schema({
     },
     product_highligts : [{type : String}],
     stock : Number,
-    //TODO:After category and variant model is created
     product_category : {
-        type: String
+        type: Schema.Types.ObjectId,
+        ref : "Category"
     },
-    product_variant : {
-        type : String
-    },
+    product_variant : [variantSchema],
     sold : Number,
     product_number_carts : Number,
     price : Decimal128,

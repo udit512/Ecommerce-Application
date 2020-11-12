@@ -3,6 +3,15 @@ const uuidv4 = require("uuid");
 const crypto = require("crypto")
 const Schema = mongoose.Schema;
 
+var productCartSchema = new Schema({
+    product : {
+        type :Schema.Types.ObjectId,
+        ref : "Product"
+    },
+    count : Number,
+    price : Number
+});
+
 var userSchema = new Schema({
     _id : mongoose.ObjectId,
     name : {
@@ -22,14 +31,8 @@ var userSchema = new Schema({
         required : true
     },
     // TODO: After the order and product schema is made
-    purchases : {
-        type : Array,
-        default : []
-    },
-    cart : {
-        type : Array,
-        default : []
-    },
+    purchases : [{type : Schema.Types.ObjectId,ref : "Order"}],
+    cart : [productCartSchema],
     role : {
         type : Number,
         default : 0
