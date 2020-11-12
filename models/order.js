@@ -30,3 +30,5 @@ var orderSchema = new Schema({
     },
     order_amount : Number
 });
+
+module.exports = mongoose.model("Order",orderSchema);
